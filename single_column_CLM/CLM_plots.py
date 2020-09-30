@@ -53,12 +53,13 @@ for icount in range(1, 8760):
     data[4,icount] = (np.sqrt(slope)/mannings) * np.maximum(data_arr[19,0,0],0.0)**(5.0/3.0)
     time[icount] = icount
 
+
+# Plot LH Flux, SWE and Runoff
 fig, ax = plt.subplots()
 ax2 = ax.twinx()
 ax.plot(time[1:8760],data[1,1:8760], color='g')
 ax.plot(time[1:8760],data[3,1:8760], color='b')
 ax2.plot(time[1:8760],data[4,1:8760], color='r')
-
 ax.set_xlabel('Time, WY [hr]')
 ax.set_ylabel('LH Flux, SWE')
 ax2.set_ylabel('Runoff [m/h]')
