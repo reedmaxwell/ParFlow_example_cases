@@ -1,0 +1,8 @@
+CLM reuse count: 1 
+Node 0: Using process grid (1,1,1)
+Node 0: Well Information
+Node 0: No Wells.
+Node 0: Time increment is too small for last iteration 
+Node 0: Well Information
+Node 0: No Wells.
+Node 0: Problem solved 
