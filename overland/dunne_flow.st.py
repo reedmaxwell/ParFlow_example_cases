@@ -10,6 +10,8 @@ import streamlit as st
 from parflow.tools.fs import get_absolute_path, cp, rm, mkdir, exists
 from parflowio.pyParflowio import PFData
 import matplotlib.pyplot as plt
+import matplotlib.animation as ani
+
 import numpy as np
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
@@ -357,6 +359,7 @@ if control2 == True:
     time    = np.zeros([N+1])    # time array, we will probably want to swap with a date
     outflow = np.zeros([N+1])  # array to load in the meterological forcing
     sat = np.zeros([N+1,300,20])
+    press = np.zeros([N+1,300,20])
     
 
     for icount in range(0, N):
@@ -368,6 +371,15 @@ if control2 == True:
         data_arr = data_obj.getDataAsArray()
         data_obj.close()
         sat[icount,:,:] = np.where(data_arr[:,0,:]<=0.0, 0.0, data_arr[:,0,:])
+        base = (base_dir+"/dunne_over/Dunne.out.press.{:05d}.pfb")
+        filename = base.format(icount)
+        data_obj = PFData(filename)
+        data_obj.loadHeader()
+        data_obj.loadData()
+        data_arr = data_obj.getDataAsArray()
+        data_obj.close()
+        press[icount,:,:] = np.where(data_arr[:,0,:]<=0.0, 0.0, data_arr[:,0,:])
+        #outflow = 
 
     fig, ax = plt.subplots()
     image = st.pyplot(plt)
